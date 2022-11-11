@@ -1,0 +1,137 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+* {
+  margin: 0;
+  padding: 0;
+ 
+}
+body {
+  line-height: 1.5;
+}
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+input,
+button,
+textarea,
+select {
+  outline: none;
+}
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+.component{
+  width: 1400px;
+  display: flex;
+  margin: auto;
+}
+.App{
+  height: 700px;
+}
+nav{
+  
+ 
+  background-color:rgb(246, 242, 242)  ;
+}
+ul{
+  list-style: none;
+  display: flex;
+}
+nav li{
+  margin-left: 20px;
+  padding-left: 10px;
+  margin-top: 50px;
+  list-style: none;
+}
+a{
+  font-weight: bold;
+  text-decoration: none;
+}
+.left{
+  height: 500px;
+  width: 30%;
+  
+}
+.weather{
+  padding: 10px;
+}
+.IMG{
+  border-radius: 20px;
+  padding: 5px;
+  width: 400px;
+  height: 200px;
+}
+.boll{
+  font-size: 40px;
+  font-weight: bold;
+}
+p{
+  padding: 5px;
+}
+.icon{
+  width: 100px;
+}
+.search{
+  margin-top: 50px;
+  margin-left: 10px;
+  width: 300px;
+  height: 35px;
+  border-radius: 10px;
+  background-color: beige;
+  border: 1px solid rgb(243, 239, 239);
+  padding-left: 10px;
+ 
+}
+
+.content{
+  margin-top: 40px;
+  width: 100%;
+  background-color: rgb(246, 242, 242);
+}
+
+.right{
+  width: 70%; 
+  height:730px;
+  background-color: rgb(246, 242, 242);
+}
+
+.list-ul{
+  padding: 10px;
+  width: 100%;
+  background-color: rgb(246, 242, 242);
+  display: flex;
+  flex-wrap: wrap; /* xuong dong */
+  box-sizing: border-box;
+}
+.uv-index-week{
+  padding: 10px;
+  width: 23%; 
+  margin-bottom: 10px;
+  
+}
+.content .uv-index-week{
+  margin: auto;
+  max-width: 30%;
+  background-color: white;
+  height: 200px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+.icon-week{
+  margin: auto;
+}
+
