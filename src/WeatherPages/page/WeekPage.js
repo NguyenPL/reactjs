@@ -70,7 +70,7 @@ const Week = () => {
          </div>
         
             <div className="weather">
-            <p className='boll'>{city}</p>
+            <p className='boll'>{city}</p>   
             <p className='boll'>{dataWeather.current ? dataWeather.current.temp :  null} °F</p>
                <p>Monday, 11h59 PM</p>
                <p>Overcast  Clouds</p>
