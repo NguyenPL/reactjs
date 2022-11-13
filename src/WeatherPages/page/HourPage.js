@@ -151,7 +151,7 @@ function getTime(time) {
  
    return (
       day +
-     ", " +
+     ",   " +
      date.toLocaleString("en-US", {
        //hour: "numeric",
        //minute: "numeric",

@@ -103,7 +103,7 @@ const Today = () => {
                <li className='uv-index'>
                   <h3>humidity</h3>
                   <p className='P'><FiPercent size={50} color='#6699FF'/></p>
-                  <h1>{dataWeather.current ? dataWeather.current.humidity : null}</h1>
+                  <h1>{dataWeather.current ? dataWeather.current.humidity : null} %</h1>
                </li>
 
                <li className='uv-index'>
