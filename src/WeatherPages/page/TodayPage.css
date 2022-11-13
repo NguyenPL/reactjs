@@ -144,3 +144,14 @@ p{
 h1{
   text-align: center;
 }
+.flex{
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  
+}
+.flex-buttom{
+  display: flex;
+  align-items: center;
+}
+

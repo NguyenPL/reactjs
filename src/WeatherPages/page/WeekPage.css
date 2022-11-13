@@ -122,6 +122,7 @@ p{
   width: 23%; 
   margin-bottom: 10px;
   
+  
 }
 .content .uv-index-week{
   margin: auto;
@@ -131,7 +132,13 @@ p{
   border-radius: 10px;
   margin-bottom: 20px;
 }
-.icon-week{
-  
-}
 
+.icon-W{
+  width: 100%;
+}
+.icon-week{
+  text-align: center;
+}
+.icon-weather{
+  margin: auto;
+}

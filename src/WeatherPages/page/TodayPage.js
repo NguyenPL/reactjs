@@ -50,70 +50,68 @@ const Today = () => {
               <p><img className='icon' src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMYTNaisA0GJu7VNW8xK_pX3r7r46wo__ihA&usqp=CAU" alt="" /></p>
             </div>
            
-               <div className="weather">
-                  <div className='Name'>
-                     <p className='boll'>{city}</p>
-                  </div>
-                 <div>
-                  <p className='boll'>{dataWeather.current ? dataWeather.current.temp :  null} °F</p>
-                  
-                  </div>
-                  <div>
-                     <p></p>
-                  </div>
-                  <p>Overcast  Clouds</p>
-                  <p> Clouds: {dataWeather.current ? dataWeather.current.clouds : null}</p>
-
-                  <img className='IMG' src="http://media.dulich24.com.vn/diemden/ha-noi-9/ddffeb6a-ea3b-480b-acb8-a0394fba6599-2.JPG" alt="" />
-               </div>
+            <div className="weather">
+               <p className='boll'>{city}</p>
+               <p className='boll'>{dataWeather.current ? dataWeather.current.temp-273.15.toFixed(0) : null}&deg;C</p>       
+               <p>{getTime(dataWeather.current ? dataWeather.current.dt : null)}</p>
+               
+               <p>Overcast  Clouds</p>
+               <p> Clouds: {dataWeather.current ? dataWeather.current.clouds : null}</p>
+               <img className='IMG' src="http://media.dulich24.com.vn/diemden/ha-noi-9/ddffeb6a-ea3b-480b-acb8-a0394fba6599-2.JPG" alt="" />
+            </div>
          </div>
+
       <div className="right">
-      <nav>
-        <ul>
-          <li>
-            <Link to="/Today">Today</Link>
-          </li> 
+         <nav>
+            <ul>
+               <li><Link to="/Today">Today</Link></li> 
+               <li><Link to="/Week">Week</Link></li>
+               <li><Link to="/Hour">Hour</Link></li>  
+            </ul>
+         </nav>
 
-          <li>
-            <Link to="/Week">Week</Link>
-          </li>
-
-          <li>
-            <Link to="/Hour">Hour</Link>
-          </li>
-        </ul>
-      </nav>
          <div className="content">
             <ul className='list-ul'>
+            
+
                <li className='uv-index'>
                   <h3>UV -index</h3>
                   <p className='P'><FiSun size={50} color='orange'/></p>
                   <h1>{dataWeather.current ? dataWeather.current.uvi : null}</h1>
                </li>
+
                <li className='uv-index'>
                   <h3>Wind -Status</h3>
                   <p className='P'><FiWind size={50} color='#6699FF'/></p>
                   <h1>{dataWeather.current ? dataWeather.current.wind_speed : null} Km/h</h1>
                </li>
+
                <li className='uv-index'>
                   <h3>Sunrise & Sunset</h3>
-                  <p className='PP'><WiSunrise size={50} color='orange'/></p>
-                  <h5>{dataWeather.current ? dataWeather.current.sunrise : null}</h5>
+                  <div className="flex">
+                     <p><WiSunrise className='PP' size={50} color='orange'/></p>
+                     <h5>{getTime(dataWeather.current ? dataWeather.current.sunrise : null) }</h5>
+                  </div>
                   
-                  <p className='FF'><WiSunset size={50} color='orange'/></p>
-                  <h5>{dataWeather.current ? dataWeather.current.sunset : null}</h5>
+                  <div className="flex-buttom">
+                     <p><WiSunset className='FF' size={50} color='orange'/></p>
+                     <h5>{getTime(dataWeather.current ? dataWeather.current.sunset : null) }</h5>
+                  </div>
+                  
                </li>
+
                <li className='uv-index'>
                   <h3>humidity</h3>
                   <p className='P'><FiPercent size={50} color='#6699FF'/></p>
                   <h1>{dataWeather.current ? dataWeather.current.humidity : null}</h1>
                </li>
+
                <li className='uv-index'>
                   <h3>visibility</h3>
                   <p className='P'><FiClock size={50} color='orange'/></p>
-                  <h1>{dataWeather.current ? dataWeather.current.visibility : null}</h1>
-
+                  <h1>{dataWeather.current ? dataWeather.current.visibility : null}m</h1>
                </li>
+               
                <li className='uv-index'>
                   <h3>pressure</h3> 
                   <p className='P'><FaTemperatureLow size={50} color='#6699FF'/></p>
@@ -126,5 +124,23 @@ const Today = () => {
    </div>
    );
 };
+
+function getTime(time) {
+   var date = new Date(time * 1000);
+   var day = date.getDay();
+   const options = { weekday: "long" };
+   var day = new Intl.DateTimeFormat("en-US", options).format(date);
+ 
+   return (
+      day + "," +
+      date.toLocaleString("en-US", {
+         hour: "numeric",
+         minute: "numeric",
+       //day: "numeric",
+       //month: "numeric"
+       //hour12: true,
+     })
+   );
+ }
 
 export default Today;
