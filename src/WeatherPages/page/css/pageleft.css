@@ -1,0 +1,18 @@
+.left{
+   width: 100%;
+   margin: auto;
+}
+.bolll{
+   font-weight: bold;
+   font-size: 35px;
+}
+.img .img-city{
+   margin-top: 30px;
+   border-radius: 20px;
+   height: 250px;
+   width: 100%;
+   
+}
+.Component{
+   width: 40%;
+}

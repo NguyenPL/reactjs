@@ -34,17 +34,15 @@ h5,
 h6 {
   overflow-wrap: break-word;
 }
-.component{
-  width: 1400px;
+.component-today{
+  width: 100%;
   display: flex;
-  margin: auto;
+ 
 }
 .App{
   height: 700px;
 }
 nav{
-  
- 
   background-color:rgb(246, 242, 242)  ;
 }
 ul{
@@ -85,6 +83,9 @@ p{
 .icon{
   width: 100px;
 }
+.Search{
+  
+}
 .search{
   margin-top: 50px;
   margin-left: 10px;
@@ -103,8 +104,8 @@ p{
   background-color: rgb(246, 242, 242);
 }
 
-.right{
-  width: 70%; 
+.right-today{
+  width: 100%; 
   height:730px;
   background-color: rgb(246, 242, 242);
 }
@@ -117,28 +118,38 @@ p{
   flex-wrap: wrap; /* xuong dong */
   box-sizing: border-box;
 }
-.uv-index-week{
+.uv-index{
   padding: 10px;
-  width: 23%; 
+  width: 30%; 
   margin-bottom: 10px;
   
-  
 }
-.content .uv-index-week{
+.content .uv-index{
   margin: auto;
   max-width: 30%;
   background-color: white;
   height: 200px;
   border-radius: 10px;
   margin-bottom: 20px;
+ 
 }
 
-.icon-W{
-  width: 100%;
+.P{
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
 }
-.icon-week{
+h1{
   text-align: center;
 }
-.icon-weather{
-  margin: auto;
+.flex{
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  
 }
+.flex-buttom{
+  display: flex;
+  align-items: center;
+}
+

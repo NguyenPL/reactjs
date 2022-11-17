@@ -34,7 +34,7 @@ h5,
 h6 {
   overflow-wrap: break-word;
 }
-.component{
+.component-week{
   width: 1400px;
   display: flex;
   margin: auto;
@@ -43,8 +43,7 @@ h6 {
   height: 700px;
 }
 nav{
-  
- 
+
   background-color:rgb(246, 242, 242)  ;
 }
 ul{
@@ -85,9 +84,6 @@ p{
 .icon{
   width: 100px;
 }
-.Search{
-  
-}
 .search{
   margin-top: 50px;
   margin-left: 10px;
@@ -106,8 +102,8 @@ p{
   background-color: rgb(246, 242, 242);
 }
 
-.right{
-  width: 70%; 
+.right-week{
+  width: 100%; 
   height:730px;
   background-color: rgb(246, 242, 242);
 }
@@ -120,13 +116,14 @@ p{
   flex-wrap: wrap; /* xuong dong */
   box-sizing: border-box;
 }
-.uv-index{
+.uv-index-week{
   padding: 10px;
-  width: 30%; 
+  width: 23%; 
   margin-bottom: 10px;
   
+  
 }
-.content .uv-index{
+.content .uv-index-week{
   margin: auto;
   max-width: 30%;
   background-color: white;
@@ -135,3 +132,23 @@ p{
   margin-bottom: 20px;
 }
 
+.icon-W{
+  width: 100%;
+}
+
+.icon-weather{
+  margin: auto;
+}
+.temp-fells{
+  display: flex;
+}
+.l{
+  margin: auto;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  display: flex;
+  margin-top: 20px;
+  font-weight: bold;
+  color: darkgray;
+}
