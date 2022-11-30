@@ -83,6 +83,149 @@
 //  }
 
 // export default PageLeft;
+// import "./css/pageleft.css";
+// import { useEffect, useState } from "react";
+// import { useDispatch, useSelector } from "react-redux";
+// import weatherSVG from "../img/weather.svg";
+// import {
+//   fetchWeather7Action,
+//   fetchWeatherAction,
+// } from "../redux/slices/weatherslices";
+// import axios from "axios";
+// import { URL_Location, URL_Data } from "../redux/slices/Api";
+
+// //display icon https://openweathermap.org/img/wn/${icon}.png
+// export const Search = () => {
+//   const [lat, setLat] = useState("21.0294498");
+//   const [lon, setLon] = useState("105.8544441");
+//   const [dataWeather, setDataWeather] = useState([]);
+//   const [location, setLocation] = useState("Thai Nguyen");
+
+//   const state = useSelector((state) => state);
+//   const { weather, loading, error } = state;
+
+//   const dispatch = useDispatch();
+//   console.log();
+
+//   // const searchLocation = (event) => {
+//   //   if (event.key === "Enter") {
+//   //     axios.get(URL_Location).then((Response) => {
+//   //       setLat(Response.data[0].lat);
+//   //       setLon(Response.data[0].lon);
+//   //       setLocation(Response.data[0].name);
+//   //     });
+//   //   }
+//   // };
+
+//   // useEffect(() => {
+//   //   axios.get(URL_Location).then((Response) => {
+//   //     setLat(Response.data[0].lat);
+//   //     setLon(Response.data[0].lon);
+//   //     setLocation(Response.data[0].name);
+//   //   });
+//   // }, []);
+
+//   // useEffect(() => {
+//   //   axios.get(URL_Data).then((Response) => {
+//   //     setDataWeather(Response.data);
+//   //     console.log(Response.data);
+//   //     dispatch(fetchWeatherAction(""));
+//   //   });
+//   // }, [lat, lon]);
+
+//   // useEffect(() => {
+//   //   dispatch(fetchWeatherAction(""));
+//   // }, []);
+
+//   // const handleChangedata = (e) => {
+//   //   setDataWeather(e.target.value);
+//   //   console.log(Response.data);
+//   // };
+
+//   // const handleSubmit = (e) => {
+//   //   e.preventDefault();
+//   //   dispatch(fetchWeatherAction(null, null, city));
+
+//   //   console.log("Fetching Weather");
+//   // }
+//   return (
+//     <div className="Container">
+//       <section className="Page-left">
+//         <div className="input-buttom">
+//           {/* Input */}
+//           <input
+//             type="text"
+//             value={location}
+//             onChange={(e) => setLocation(e.target.value)}
+//             placeholder="Search City"
+//             className="search-left"
+//           ></input>
+//           {/* Button */}
+//           <button
+//             onClick={() =>
+//               dispatch(
+//                 fetchWeatherAction(location),
+//                 dispatch(fetchWeather7Action())
+//               )
+//             }
+//             type="button"
+//             className="buttom"
+//           >
+//             Search
+//           </button>
+//         </div>
+
+//         {/* Content goes here */}
+//         {loading ? (
+//           <h1 className="">Loading please wait...</h1>
+//         ) : error ? (
+//           <h1 className="">{error?.message}</h1>
+//         ) : (
+//           <div className="">
+//             <span className="img-left">
+//               {/* weather logo */}
+//               <img
+//                 className="w-56 "
+//                 src={`https://openweathermap.org/img/wn/${weather?.weather[0].icon}@2x.png`}
+//                 alt="/"
+//               />
+//             </span>
+//             <div className="flex-list">
+//               <h3 className="city">
+//                 {weather?.name}, {weather?.sys?.country}
+//               </h3>
+//               <p className="temp">
+//                 {Math.ceil(Number(weather?.main.temp))} <span>°C</span>
+//               </p>
+//               <p className="main">{weather?.weather[0].main}</p>{" "}
+//               <p className="description">
+//                 {weather?.weather[0].description}{" "}
+//                 {/* {weather?.name}, {weather?.sys?.country} :{" "} */}
+//                 {Math.ceil(Number(weather?.main.temp))}
+//               </p>
+//               <p> humidity{weather?.main?.humidity} %</p>
+//             </div>
+
+//             <a>
+//               <span className="">
+//                 {/* weather logo */}
+//                 <img
+//                   className="w-56 "
+//                   src={`https://openweathermap.org/img/wn/${weather?.weather[0].icon}.png`}
+//                   alt="/"
+//                 />
+//               </span>
+//             </a>
+//           </div>
+//         )}
+//       </section>
+//       {/* Footer */}
+//     </div>
+//   );
+// };
+
+// export default Search;
+
 import "./css/pageleft.css";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -92,131 +235,71 @@ import {
   fetchWeatherAction,
 } from "../redux/slices/weatherslices";
 import axios from "axios";
-import { URL_Location, URL_Data } from "../redux/slices/Api";
+import { URL_Location } from "../redux/slices/Api";
 
 //display icon https://openweathermap.org/img/wn/${icon}.png
-export const Search = () => {
+export const PageLeft = () => {
   const [lat, setLat] = useState("21.0294498");
   const [lon, setLon] = useState("105.8544441");
   const [dataWeather, setDataWeather] = useState([]);
   const [location, setLocation] = useState("Thai Nguyen");
+  const [city, setCity] = useState("");
 
   const state = useSelector((state) => state);
   const { weather, loading, error } = state;
-
   const dispatch = useDispatch();
-  console.log();
 
-  // const searchLocation = (event) => {
-  //   if (event.key === "Enter") {
-  //     axios.get(URL_Location).then((Response) => {
-  //       setLat(Response.data[0].lat);
-  //       setLon(Response.data[0].lon);
-  //       setLocation(Response.data[0].name);
-  //     });
-  //   }
-  // };
+  // useEffect(
+  //   (data) => {
+  //     axios
+  //       .get(URL_Location, {
+  //         params: {
+  //           q: location,
+  //           units: "Metric",
+  //           lang: "en",
+  //         },
+  //       })
+  //       .then(function (response) {
+  //         if (response.data.coord) {
+  //           dispatch(fetchWeather7Action(response.data.coord));
+  //         }
+  //         console.log(response.data);
+  //         //console.log(weather);
+  //       });
+  //   },
+  //   [location]
+  // );
 
-  // useEffect(() => {
-  //   axios.get(URL_Location).then((Response) => {
-  //     setLat(Response.data[0].lat);
-  //     setLon(Response.data[0].lon);
-  //     setLocation(Response.data[0].name);
-  //   });
-  // }, []);
-
-  // useEffect(() => {
-  //   axios.get(URL_Data).then((Response) => {
-  //     setDataWeather(Response.data);
-  //     console.log(Response.data);
-  //     dispatch(fetchWeatherAction(""));
-  //   });
-  // }, [lat, lon]);
-
-  // useEffect(() => {
-  //   dispatch(fetchWeatherAction(""));
-  // }, []);
-
-  // const handleChangedata = (e) => {
-  //   setDataWeather(e.target.value);
-  //   console.log(Response.data);
-  // };
-
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   dispatch(fetchWeatherAction(null, null, city));
-
-  //   console.log("Fetching Weather");
-  // }
   return (
     <div className="Container">
       <section className="Page-left">
         <div className="input-buttom">
           {/* Input */}
           <input
-            type="text"
-            value={location}
-            onChange={(e) => setLocation(e.target.value)}
-            placeholder="Search City"
             className="search-left"
+            type="text"
+            placeholder="Search City"
+            onKeyPress={(event) => {
+              if (event.key === "Enter") {
+                setLocation(event.target.value);
+                dispatch(fetchWeather7Action());
+                dispatch(fetchWeatherAction(location));
+              }
+            }}
           ></input>
-          {/* Button */}
-          <button
-            onClick={() => dispatch(fetchWeatherAction(location))}
-            type="button"
-            className="buttom"
-          >
-            Search
-          </button>
         </div>
-
-        {/* Content goes here */}
-        {loading ? (
-          <h1 className="">Loading please wait...</h1>
-        ) : error ? (
-          <h1 className="">{error?.message}</h1>
-        ) : (
-          <div className="">
-            <span className="img-left">
-              {/* weather logo */}
-              <img
-                className="w-56 "
-                src={`https://openweathermap.org/img/wn/${weather?.weather[0].icon}@2x.png`}
-                alt="/"
-              />
-            </span>
-            <div className="flex-list">
-              <h3 className="city">
-                {weather?.name}, {weather?.sys?.country}
-              </h3>
-              <p className="temp">
-                {Math.ceil(Number(weather?.main.temp - 275.15))} <span>°C</span>
-              </p>
-              <p className="main">{weather?.weather[0].main}</p>{" "}
-              <p className="description">
-                {weather?.weather[0].description}{" "}
-                {/* {weather?.name}, {weather?.sys?.country} :{" "} */}
-                {Math.ceil(Number(weather?.main.temp - 275.15))}
-              </p>
-              <p> humidity{weather?.main?.humidity} %</p>
-            </div>
-
-            <a>
-              <span className="">
-                {/* weather logo */}
-                <img
-                  className="w-56 "
-                  src={`https://openweathermap.org/img/wn/${weather?.weather[0].icon}.png`}
-                  alt="/"
-                />
-              </span>
-            </a>
-          </div>
-        )}
+        <div className="flex-list">
+          <h2>{city}</h2>
+          <h3 className="tempp">
+            {Math.ceil(Number(weather?.current.temp - 275.15))} <span>°C</span>
+          </h3>
+          {/* <p className="main">{weather?.weather.main}</p>{" "} */}
+          <p className="description">{weather?.sys?.country}</p>
+          <p> humidity{weather?.main?.humidity} %</p>
+        </div>
       </section>
-      {/* Footer */}
     </div>
   );
 };
 
-export default Search;
+export default PageLeft;
