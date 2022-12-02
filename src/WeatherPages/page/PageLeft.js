@@ -236,6 +236,8 @@ import {
 } from "../redux/slices/weatherslices";
 import axios from "axios";
 import { URL_Location } from "../redux/slices/Api";
+import { current } from "@reduxjs/toolkit";
+
 
 //display icon https://openweathermap.org/img/wn/${icon}.png
 export const PageLeft = () => {
@@ -249,57 +251,93 @@ export const PageLeft = () => {
   const { weather, loading, error } = state;
   const dispatch = useDispatch();
 
-  // useEffect(
-  //   (data) => {
-  //     axios
-  //       .get(URL_Location, {
-  //         params: {
-  //           q: location,
-  //           units: "Metric",
-  //           lang: "en",
-  //         },
-  //       })
-  //       .then(function (response) {
-  //         if (response.data.coord) {
-  //           dispatch(fetchWeather7Action(response.data.coord));
-  //         }
-  //         console.log(response.data);
-  //         //console.log(weather);
-  //       });
-  //   },
-  //   [location]
-  // );
+  useEffect(
+    (data) => {
+      axios
+        .get(URL_Location, {
+          params: {
+            q: location,
+            units: "Metric",
+            lang: "en",
+          },
+        })
+        .then(function (response) {
+          if (response.data.coord) {
+            dispatch(fetchWeather7Action(response.data.coord));
+          }
+          setCity(response.data.name)
+          console.log(response.data);
+          //console.log(weather);
+        });
+    },
+    [location]
+  );   
+  
+    return (
+      <div className="Container">
+        <section className="Page-left">
+          <div className="input-buttom">
+            {/* Input */}
+            <input
+              className="search-left"
+              type="text"
+              placeholder="Search City"
+              onKeyPress={(event) => {
+                if (event.key === "Enter") {
+                  setLocation(event.target.value);
+                  dispatch(fetchWeather7Action());
+                  //dispatch(fetchWeatherAction(location));
+                }
+              }}
+            ></input>
+          </div>
+          <div className="flex-list">
+          <div className="forecast-icon">
+                  
+                    <img className="img-fix"
+                      src={`https://www.pngall.com/wp-content/uploads/11/Weather-PNG-Background.png,`}
+                      alt=""
+                    />
+               
+            </div>
+  
+            <h2 className="name-city">{city}</h2>
+              
+            <h3 className="tempp">
+              {Math.ceil(Number(weather?.current.temp - 275.15))} <span>°C</span>
+            </h3>
+            <p>{getTime(weather?.current.dt)}</p>
+            {/* <p className="main">{weather?.weather.main}</p>{" "} */}
+            {/* <p className="description">{weather?.current?.country}</p> */}
+            <p> clouds: {weather?.current.clouds} %</p>
 
+            <img className="img-fix-city" src="https://nemtv.vn/wp-content/uploads/2019/01/ha-noi-ve-dem-8.jpg" alt="" />
+          </div>
+        </section>
+      </div>
+    );
+  }
+
+
+  
+
+function getTime(time) {
+  var date = new Date(time * 1000);
+  var day = date.getDay();
+  const options = { weekday: "long" };
+  //var day = new Intl.DateTimeFormat("en-US", options).format(day);
+  var day = new Intl.DateTimeFormat("en-US", options).format(date.Now);
   return (
-    <div className="Container">
-      <section className="Page-left">
-        <div className="input-buttom">
-          {/* Input */}
-          <input
-            className="search-left"
-            type="text"
-            placeholder="Search City"
-            onKeyPress={(event) => {
-              if (event.key === "Enter") {
-                setLocation(event.target.value);
-                dispatch(fetchWeather7Action());
-                dispatch(fetchWeatherAction(location));
-              }
-            }}
-          ></input>
-        </div>
-        <div className="flex-list">
-          <h2>{city}</h2>
-          <h3 className="tempp">
-            {Math.ceil(Number(weather?.current.temp - 275.15))} <span>°C</span>
-          </h3>
-          {/* <p className="main">{weather?.weather.main}</p>{" "} */}
-          <p className="description">{weather?.sys?.country}</p>
-          <p> humidity{weather?.main?.humidity} %</p>
-        </div>
-      </section>
-    </div>
+    day+
+    ",  " +
+    date.toLocaleTimeString("en-US", {
+      hour: "numeric",
+      minute: "numeric",
+      //day: "numeric",
+      //month: "numeric"
+      
+    })
   );
-};
+}
 
 export default PageLeft;

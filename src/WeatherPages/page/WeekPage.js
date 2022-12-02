@@ -64,24 +64,41 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./css/WeekPage.css";
-import axios from "axios";
-import { BsCloudSun } from "react-icons/bs";
+import "../DailyItemDetails/DailyItemDetails"
 import { useDispatch, useSelector } from "react-redux";
 import "moment-timezone";
-import { URL_DATA } from "../redux/slices/Api";
-import { fetchWeather7Action } from "../redux/slices/weatherslices";
+import {
+  Accordion,
+  AccordionItem,
+  AccordionItemHeading,
+  AccordionItemButton,
+  AccordionItemPanel,
+} from 'react-accessible-accordion';
 
 const Week = () => {
-  const [dataWeather, setDataWeather] = useState([]);
+  const [dataWeather, setDataWeather] = useState(null);
   const state = useSelector((state) => state);
   const { weather, loading, error, direct } = state;
   console.log(weather);
 
   const clickEvent = () => {
-    alert("helo");
-    <div className="dataweather">
-      <h1>helo</h1>
-    </div>;
+    alert("helu");
+    <div className="dataDailist">
+         <div className="listDailist">
+             <p>{new Date(weather?.current.dt * 1000).toLocaleString("en-GB", {weekday: "long",})}</p><br />
+               <div className="listP">
+               <label>Temp current{Math.ceil(Number(weather?.current.temp - 275.15))}  &deg; C</label>
+               
+               <label>Clouds: {weather?.current.clouds}</label>
+               <label>Humidity: {weather?.current.humidity}</label>
+               <label>Wind speed: {weather?.current.wind_speed}</label>
+               <label>Sunrice: {getTime(weather?.current.sunrise)}</label>
+               <label>Sunset: {getTime(weather?.current.sunset)}</label>
+               <label>wind_gust: {weather?.current.wind_gust}</label>
+               <label>wind_deg: {weather?.current.wind_deg}</label>
+               </div>
+         </div>
+      </div>   
   };
   return (
     <div className="component-week">
@@ -109,7 +126,6 @@ const Week = () => {
 
                     <p className="l">
                       {/* weather logo */}
-
                       <img
                         src={`https://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`}
                         alt="/"
@@ -128,9 +144,12 @@ const Week = () => {
                       </p>
                     </div>
                   </li>
+                  
                 ))
               : null}
-          </ul>
+
+              
+          </ul>    
         </div>
       </div>
     </div>
@@ -146,12 +165,14 @@ function getTime(time) {
   return (
     dayy +
     ", " +
-    date.toLocaleString("en-US", {
+    date.toLocaleDateString("en-US", {
       //hour: "numeric",
       //minute: "numeric",
+      
       dayy: "numeric",
       month: "numeric",
-      //hour12: true,
+      // year:"2-digit"
+    
     })
   );
 }

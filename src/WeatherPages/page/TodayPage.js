@@ -178,7 +178,7 @@ const Today = () => {
         </nav>
 
         <div className="content-today">
-          <ul className="list-ul">
+          <ul className="list-ul-today">
             <li className="uv-index">
               <p>UV -index</p>
               <p className="P">

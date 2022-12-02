@@ -198,35 +198,35 @@ export const fetchWeather7Action = createAsyncThunk(
     }
   }
 );
-export const fetchWeatherAction = createAsyncThunk(
-  "weather/fetch",
-  async (location, { rejectWithValue, getState, dispatch }) => {
-    try {
-      const { data } = await axios
-        .get(URL_Location, {
-          params: {
-            q: location,
-            units: "Metric",
-            lang: "en",
-          },
-        })
+// export const fetchWeatherAction = createAsyncThunk(
+//   "weather/fetch",
+//   async (location, { rejectWithValue, getState, dispatch }) => {
+//     try {
+//       const { data } = await axios
+//         .get(URL_Location, {
+//           params: {
+//             q: location,
+//             units: "Metric",
+//             lang: "en",
+//           },
+//         })
 
-        .then(function (response) {
-          if (response.data.coord) {
-            dispatch(fetchWeather7Action(response.data.coord));
-          }
-          console.log(response.data);
-        });
+//         .then(function (response) {
+//           if (response.data.coord) {
+//             dispatch(fetchWeather7Action(response.data.coord));
+//           }
+//           console.log(response.data);
+//         });
 
-      return data;
-    } catch (error) {
-      if (!error?.response) {
-        throw error;
-      }
-      return rejectWithValue(error?.response?.data);
-    }
-  }
-);
+//       return data;
+//     } catch (error) {
+//       if (!error?.response) {
+//         throw error;
+//       }
+//       return rejectWithValue(error?.response?.data);
+//     }
+//   }
+// );
 // export const fetchWeather7Action = createAsyncThunk(
 //   "weather7day/fetchdata",
 //   async ({ rejectWithValue, getState, dispatch }) => {
@@ -349,22 +349,22 @@ const weatherSlice = createSlice({
     //weather 7day
 
     // //pending
-    builder.addCase(fetchWeatherAction.pending, (state, action) => {
-      state.loading = true;
-    });
+    // builder.addCase(fetchWeatherAction.pending, (state, action) => {
+    //   state.loading = true;
+    // });
 
-    //rejected
-    builder.addCase(fetchWeatherAction.rejected, (state, action) => {
-      state.loading = false;
-      state.weather7day = undefined;
-      state.error = action?.payload;
-    });
-    //fulfilled
-    builder.addCase(fetchWeatherAction.fulfilled, (state, action) => {
-      state.weather7day = action?.payload;
-      state.loading = false;
-      state.weather7day = undefined;
-    });
+    // //rejected
+    // builder.addCase(fetchWeatherAction.rejected, (state, action) => {
+    //   state.loading = false;
+    //   state.weather7day = undefined;
+    //   state.error = action?.payload;
+    // });
+    // //fulfilled
+    // builder.addCase(fetchWeatherAction.fulfilled, (state, action) => {
+    //   state.weather7day = action?.payload;
+    //   state.loading = false;
+    //   state.weather7day = undefined;
+    // });
   },
 });
 
