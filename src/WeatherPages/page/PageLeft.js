@@ -266,7 +266,7 @@ export const PageLeft = () => {
             dispatch(fetchWeather7Action(response.data.coord));
           }
           setCity(response.data.name)
-          console.log(response.data);
+          //console.log(response.data);
           //console.log(weather);
         });
     },

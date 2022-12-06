@@ -2,10 +2,10 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import "./DailyItemDetails.css"
-
+import {DailyWeatherDetailsModel} from './DailyItemDetails'
 
 const ItemDetails = () =>{
-const [dataWeather, setDataWeather] = useState(null);
+
   const state = useSelector((state) => state);
   const { weather, loading, error, direct } = state;
 
