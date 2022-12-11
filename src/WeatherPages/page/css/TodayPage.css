@@ -192,22 +192,29 @@ h1{
  .component-today{
    width: 1400px;
    display: flex;
-  
+   
  }
  
  nav{
    background-color: rgb(233, 231, 231);
+   
  }
  ul{
    list-style: none;
    display: flex;
  }
- nav li{
-   margin-left: 20px;
-   padding-left: 10px;
-   margin-top: 50px;
-   list-style: none;
+ .bdbtn-today{
+  color: rgb(76, 80, 83);
+  border-bottom: solid 4px;
+  padding-bottom: 5px;
  }
+ /* .after::after{
+  content: '';
+  border-bottom: 10px solid #000;
+  width: 10px;
+  height: 10px;
+  display: block;
+ } */
  a{
    font-weight: bold;
    text-decoration: none;
@@ -251,7 +258,6 @@ h1{
  }
  
  .content-today{
-   
    width: 100%;
    background-color: rgb(233, 231, 231);
  }
@@ -260,8 +266,9 @@ h1{
    width: 100%; 
    height:800px;
    background-color: rgb(233, 231, 231);
-   border-radius: 0px 20px 0px 20px;
+   
  }
+
  
  .list-ul-today{
    padding: 10px;

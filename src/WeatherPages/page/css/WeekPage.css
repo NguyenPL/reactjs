@@ -126,7 +126,12 @@ nav li{
    margin-top: 50px;
    list-style: none;
  }
- 
+ .bdbtn-week{
+  
+  color: rgb(76, 80, 83);
+  border-bottom: solid 4px;
+  padding-bottom: 5px;
+ }
  .right-week{
    width: 100%; 
    height:800px;
@@ -196,7 +201,7 @@ nav li{
    box-sizing: border-box;
  }
  .div-dailist{
-  width: 96%;
+  width: 98%;
   height: 200px;
   background-color: rgb(253, 253, 253);
   margin: auto;

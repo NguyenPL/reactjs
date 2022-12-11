@@ -17,8 +17,6 @@ import {
   Filler,
 } from "chart.js";
 
-//import {doughnut} from 'react-chartjs-2'
-
 ChartJS.register(
   Title,
   Tooltip,
@@ -32,19 +30,31 @@ ChartJS.register(
 const Hour = () => {
   const state = useSelector((state) => state);
   const { weather, loading, error } = state;
-  const [dataChart, setDataChart] = useState([state]);
+  const [dataChart, setDataChart] = useState({state});
   console.log(weather);
+  console.log(dataChart);
+
   useEffect(() => {
     setDataChart({
-      //labels: weather?.hourly.map((item) => getTime(item.dt)),
+      labels: weather?.hourly.map((item) => getTime(item.dt)),
       datasets: [
         {
-          labels: "dt",
-          //weather: weather?.hourly.map((item) => item.temp),
+          label: "Temp °C",
+          data: weather?.hourly.map(item => Math.ceil(Number(item.temp - 275.15))),
           fill: true,
-          boderClor: "rbg(255,99, 132)",
-          backgroudColor: "rbg(255,99, 132)",
+          backgroundColor: "yellow",
+          borderColor: "pink",
+          tension: 0.4,
         },
+
+        {
+          label: "Feels_Like",
+          data: weather?.hourly.map(item => Math.ceil(Number(item.feels_like - 275.15))),
+          fill: true,
+          backgroundColor: "yellow",
+          borderColor: "green",
+          tension: 0.4,
+        }
       ],
     });
   }, []);
@@ -60,12 +70,23 @@ const Hour = () => {
               <Link to="/Week">Week</Link>
             </li>
             <li>
-              <Link to="/Hour">Hour</Link>
+              <Link className="bdbtn-hour" to="/Hour">Hour</Link>
             </li>
           </ul>
         </nav>
         <div className="chart">
-          <Line data={dataChart} />
+          {dataChart && dataChart.datasets && (
+            <Line 
+              data={dataChart}
+              options={{
+                responsive:true,
+                plugins: {
+                  legend:{position: "top"},
+                  title: {display: true,}
+                }
+              }}
+          />
+          )}
         </div>
       </div>
     </div>
@@ -74,14 +95,14 @@ const Hour = () => {
 
 function getTime(time) {
   var date = new Date(time * 1000);
-  //var dayy = date.getDay();
+  var dayy = date.getDay();
   const options = { weekday: "long" };
   var dayy = new Intl.DateTimeFormat("en-US").format(date);
 
   return (
-    dayy +
-    ", " +
-    date.toLocaleDateString("en-US", {
+    
+    "" +
+    date.toLocaleTimeString("en-US", {
       hour: "numeric",
       minute: "numeric",
 

@@ -182,9 +182,15 @@ h6 {
 }
 
 nav{
-  background-color: rgb(233, 231, 231);
-  padding-bottom: 40px;
+  background-color: rgb(246, 246, 246);
+  padding-bottom: 60px;
 }
+.bdbtn-hour{
+  
+  color: rgb(76, 80, 83);
+  border-bottom: solid 4px;
+  padding-bottom: 5px;
+ }
 ul{
   list-style: none;
   display: flex;
@@ -258,5 +264,14 @@ p{
   height: 200px;
   border-radius: 10px;
   margin-bottom: 20px;
+}
+
+.chart{
+  
+  border-radius: 10px;
+  margin: auto;
+  width: 98%;
+  height: 500px;
+  background-color: white;
 }
 

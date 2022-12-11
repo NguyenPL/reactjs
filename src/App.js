@@ -9,9 +9,10 @@ import WeekPage from "./WeatherPages/page/WeekPage";
 
 function App() {
   return (
-    <div className="App">
+    <div className="container-T">
+      <div className="App">
       
-         <Provider store={store}>
+        <Provider store={store}>
         <Search />
         <Routes>
           <Route path="/" element={<TodayPage />} />
@@ -23,6 +24,8 @@ function App() {
       
      
     </div>
+    </div>
+    
   );
 }
 

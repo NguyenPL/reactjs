@@ -2,7 +2,11 @@
    padding-top: 100px;
    margin: auto;
    display: flex;
-   width: 70%;
+   width: 75%;
   
    
+}
+.container-T{
+   width: 100%;
+   background-color: rgb(205, 208, 208);
 }

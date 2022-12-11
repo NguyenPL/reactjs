@@ -19,20 +19,43 @@ const Week = () => {
   const { weather, loading, error, direct } = state;
   console.log(weather);
 
-  // const hanldClick =(props)=>{
+  const clickMe = () =>{
+    if( weather=weather.item){
+      return(
+      <div className="dataDailist">
+         <div className="listDailist">
+             <p>{new Date(weather?.current.dt * 1000).toLocaleString("en-GB", {weekday: "long",})}</p><br />
+               <div className="listP">
+               <label>Temp current{Math.ceil(Number(weather?.current.temp - 275.15))}  &deg; C</label>
+               
+               <label>Clouds: {weather?.current.clouds}</label>
+               <label>Humidity: {weather?.current.humidity}</label>
+               <label>Wind speed: {weather?.current.wind_speed}</label>
+               <label>Sunrice: {getTime(weather?.current.sunrise)}</label>
+               <label>Sunset: {getTime(weather?.current.sunset)}</label>
+               <label>wind_gust: {weather?.current.wind_gust}</label>
+               <label>wind_deg: {weather?.current.wind_deg}</label>
+               </div>
+         </div>
+      </div>   
+   )
+  }else{
+    console.log("khong co gi");
+  }
+   
     
-  // }
+  }
 
   return (
     <div className="component-week">
       <div className="right-week">
         <nav>
           <ul>
-            <li>
+            <li >
               <Link to="/Today">Today</Link>
             </li>
-            <li>
-              <Link to="/Week">Week</Link>
+            <li >
+              <Link className="bdbtn-week" to="/Week">Week</Link>
             </li>
             <li>
               <Link to="/Hour">Hour</Link>
@@ -44,10 +67,12 @@ const Week = () => {
           <ul className="list-ul">
             {weather
               ? weather.daily.map((item, index ) => (
-                  <div className="uv-index-week" onClick={() => {
+                  <div className="uv-index-week"onClick={(onClick) => {
                     console.log(item);
                     
-                  }}>
+                  }} >
+                   
+               
                     <p className="icon-week">{getTime(item.dt)}</p>
                     <p className="l">
                       {/* weather logo */}
@@ -71,11 +96,14 @@ const Week = () => {
                   </div> 
                 ),)
 
-              : null}
-          </ul>  
-          <div className="div-dailist">
-                <h1>hello</h1>
+              : null
+
+              }
+              <div className="div-dailist">
+              <ItemDetails></ItemDetails>
           </div>
+          </ul>  
+          
         </div>
       </div>
     </div>
