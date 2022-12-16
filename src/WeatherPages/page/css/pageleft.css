@@ -1,7 +1,7 @@
 
 .Container{
    width: 40%;
-   height: 1000px;
+   height: 900px;
    margin: auto;
 }
 .Page-left{
@@ -13,27 +13,22 @@
 .search-left{
    padding-left: 10px;
    margin: auto;
-   width: 370px;
+   width: 93%;
    height: 40px;
    margin-top: 27px;
    border-radius: 5px;
-   border-color: orange;
+   border-color: rgb(233, 229, 223);
    
 }
-/* .buttom{
-   height: 30px;
-   margin-top: 20px;
-   border-radius: 10px;
-   border: solid 1px white;
-   margin-left: 10px;
-} */
+
 .name-city{
-   font-size: 33px;
-   padding-bottom: 10px;
+   font-size: 40px;
+   padding-bottom: 5px;
+   margin-left: 10px;
+   color: black;
 }
-.tempp{
-   font-size: 35px;
-   padding-bottom: 10px;
+.p-left{
+    
 }
 .img-fix{
    padding-top: 20px;
@@ -64,6 +59,15 @@ p{
 .img-fix-city{
    
    border-radius: 20px;
-   width: 96%;
+   width: 95%;
    margin: 30px auto;
+}
+.image{
+   margin: auto;
+   width: 96%;
+}
+.sizeImg{
+   margin-left: 20px;
+   width: 150px;
+   height: 150px;
 }

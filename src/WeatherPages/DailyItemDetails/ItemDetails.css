@@ -1,6 +1,13 @@
 
 .dataDailist{
    background-color:rgb(233, 231, 231); ;
+   width: 100%;
+   border: solid 1px white;
+   background-color: white;
+   border-radius: 10px;
+   height: auto;
+   margin: auto;
+   color: #68645f;
 }
 .listDailist{
    width: 100%;
@@ -18,4 +25,7 @@
    row-gap: 0;
    column-gap: 15px;
    padding: 5px 15px;
+}
+.lb{
+   padding-bottom: 10px;
 }

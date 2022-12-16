@@ -30,9 +30,9 @@ ChartJS.register(
 const Hour = () => {
   const state = useSelector((state) => state);
   const { weather, loading, error } = state;
-  const [dataChart, setDataChart] = useState({state});
-  console.log(weather);
-  console.log(dataChart);
+  const [dataChart, setDataChart] = useState({ state });
+  // console.log(weather);
+  // console.log(dataChart);
 
   useEffect(() => {
     setDataChart({
@@ -40,7 +40,9 @@ const Hour = () => {
       datasets: [
         {
           label: "Temp °C",
-          data: weather?.hourly.map(item => Math.ceil(Number(item.temp - 275.15))),
+          data: weather?.hourly.map((item) =>
+            Math.ceil(Number(item.temp - 275.15))
+          ),
           fill: true,
           backgroundColor: "yellow",
           borderColor: "pink",
@@ -49,12 +51,14 @@ const Hour = () => {
 
         {
           label: "Feels_Like",
-          data: weather?.hourly.map(item => Math.ceil(Number(item.feels_like - 275.15))),
+          data: weather?.hourly.map((item) =>
+            Math.ceil(Number(item.feels_like - 275.15))
+          ),
           fill: true,
           backgroundColor: "yellow",
           borderColor: "green",
           tension: 0.4,
-        }
+        },
       ],
     });
   }, []);
@@ -70,23 +74,27 @@ const Hour = () => {
               <Link to="/Week">Week</Link>
             </li>
             <li>
-              <Link className="bdbtn-hour" to="/Hour">Hour</Link>
+              <Link className="bdbtn-hour" to="/Hour">
+                Hour
+              </Link>
             </li>
           </ul>
         </nav>
         <div className="chart">
-          {dataChart && dataChart.datasets && (
-            <Line 
-              data={dataChart}
-              options={{
-                responsive:true,
-                plugins: {
-                  legend:{position: "top"},
-                  title: {display: true,}
-                }
-              }}
-          />
-          )}
+          <div className="chart-fix">
+            {dataChart && dataChart.datasets && (
+              <Line
+                data={dataChart}
+                options={{
+                  responsive: true,
+                  plugins: {
+                    legend: { position: "top" },
+                    title: { display: true },
+                  },
+                }}
+              />
+            )}
+          </div>
         </div>
       </div>
     </div>
@@ -100,7 +108,6 @@ function getTime(time) {
   var dayy = new Intl.DateTimeFormat("en-US").format(date);
 
   return (
-    
     "" +
     date.toLocaleTimeString("en-US", {
       hour: "numeric",

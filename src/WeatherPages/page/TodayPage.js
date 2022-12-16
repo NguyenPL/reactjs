@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { FiSun, FiWind, FiPercent, FiClock } from "react-icons/fi";
 import axios from "axios";
 import { FaTemperatureLow } from "react-icons/fa";
-import { WiSunrise, WiSunset } from "react-icons/wi";
+import { WiSunrise, WiSunset, WiHumidity } from "react-icons/wi";
 import {
   fetchWeather7Action,
   fetchWeatherAction,
@@ -53,7 +53,7 @@ const Today = () => {
               </p>
               <h1>
                 {weather?.current.wind_speed}
-                Km/h
+                Km/s
               </h1>
             </li>
 
@@ -74,9 +74,9 @@ const Today = () => {
             </li>
 
             <li className="uv-index">
-              <p>Pumidity</p>
+              <p>Humidity</p>
               <p className="P">
-                <FiPercent size={50} color="#6699FF" />
+                <WiHumidity size={50} color="#6699FF" />
               </p>
               <h1>{weather?.current.humidity} %</h1>
             </li>
@@ -85,14 +85,17 @@ const Today = () => {
               <p className="P">
                 <FiClock size={50} color="orange" />
               </p>
-              <h1>{weather?.current.visibility}/m</h1>
+              <h1>{(weather?.current.visibility / 1000).toFixed(0)} km</h1>
             </li>
             <li className="uv-index">
               <p>Pressure</p>
               <p className="P">
                 <FaTemperatureLow size={50} color="#6699FF" />
               </p>
-              <h1>{weather?.current?.pressure}</h1>
+              <h1>
+                {weather?.current?.pressure}
+                <a className="hpa">hPa</a>
+              </h1>
             </li>
           </ul>
         </div>

@@ -1,61 +1,37 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./css/WeekPage.css";
-import "../DailyItemDetails/DailyItemDetails"
+import "../DailyItemDetails/ItemDetails";
 import { useDispatch, useSelector } from "react-redux";
 import "moment-timezone";
-import {
-  Accordion,
-  AccordionItem,
-  AccordionItemHeading,
-  AccordionItemButton,
-  AccordionItemPanel,
-} from 'react-accessible-accordion';
-import ItemDetails from "../DailyItemDetails/DailyItemDetails";
+import ItemDetails from "../DailyItemDetails/ItemDetails";
+import { current } from "@reduxjs/toolkit";
 
 const Week = () => {
-  const [dataWeather, setDataWeather] = useState(null);
   const state = useSelector((state) => state);
   const { weather, loading, error, direct } = state;
-  console.log(weather);
+  const [dataWeathe, setDataWeathe] = useState({});
+  const [activeIndex, setActiveIndex] = useState(null);
+  const [test, setTest] = useState([]);
+  const [image, setImage] = useState("");
+  const [isActive, setIsActive] = useState(false);
+  //const [backgroundColor, setBackGroudColor] = useState(false);
 
-  const clickMe = () =>{
-    if( weather=weather.item){
-      return(
-      <div className="dataDailist">
-         <div className="listDailist">
-             <p>{new Date(weather?.current.dt * 1000).toLocaleString("en-GB", {weekday: "long",})}</p><br />
-               <div className="listP">
-               <label>Temp current{Math.ceil(Number(weather?.current.temp - 275.15))}  &deg; C</label>
-               
-               <label>Clouds: {weather?.current.clouds}</label>
-               <label>Humidity: {weather?.current.humidity}</label>
-               <label>Wind speed: {weather?.current.wind_speed}</label>
-               <label>Sunrice: {getTime(weather?.current.sunrise)}</label>
-               <label>Sunset: {getTime(weather?.current.sunset)}</label>
-               <label>wind_gust: {weather?.current.wind_gust}</label>
-               <label>wind_deg: {weather?.current.wind_deg}</label>
-               </div>
-         </div>
-      </div>   
-   )
-  }else{
-    console.log("khong co gi");
-  }
-   
-    
-  }
-
+  // const hanldClick = () => {
+  //   setIsActive((current) => !current);
+  // };
   return (
     <div className="component-week">
       <div className="right-week">
         <nav>
           <ul>
-            <li >
+            <li>
               <Link to="/Today">Today</Link>
             </li>
-            <li >
-              <Link className="bdbtn-week" to="/Week">Week</Link>
+            <li>
+              <Link className="bdbtn-week" to="/Week">
+                Week
+              </Link>
             </li>
             <li>
               <Link to="/Hour">Hour</Link>
@@ -66,13 +42,19 @@ const Week = () => {
         <div className="content-week">
           <ul className="list-ul">
             {weather
-              ? weather.daily.map((item, index ) => (
-                  <div className="uv-index-week"onClick={(onClick) => {
-                    console.log(item);
-                    
-                  }} >
-                   
-               
+              ? weather.daily.map((item, index) => (
+                  <div
+                    // style={{
+                    //   backgroundColor: isActive ? "#0fb6e0" : "",
+                    //   //color: isActive ? "white" : "",
+                    // }}
+                    className="uv-index-week"
+                    onClick={() => {
+                      setTest(item);
+                      //hanldClick();
+                    }}
+                    key={index}
+                  >
                     <p className="icon-week">{getTime(item.dt)}</p>
                     <p className="l">
                       {/* weather logo */}
@@ -83,27 +65,25 @@ const Week = () => {
                     </p>
                     <div className="temp-fells">
                       <p className="l">
-                        {Math.ceil(Number(item.temp.min - 275.15))}{" "}
-                        <span>°</span>-
-                        {/* {Math.round((item.temp.day = (32 * 5) / 9))}&deg;C{" "} */}
-                        <p>
+                        <a className="l">
+                          {Math.ceil(Number(item.temp.min - 275.15))}
+                          {""}
+                          <span> ° </span>
+                        </a>
+                        <a className="space">-</a>
+                        <a className="l">
                           {Math.ceil(Number(item.temp.max - 275.15))}{" "}
                           <span>°</span>
-                          {/* {Math.round((item.feels_like.day = (32 * 5) / 9))} */}
-                        </p>
+                        </a>
                       </p>
                     </div>
-                  </div> 
-                ),)
-
-              : null
-
-              }
-              <div className="div-dailist">
-              <ItemDetails></ItemDetails>
-          </div>
-          </ul>  
-          
+                  </div>
+                ))
+              : null}
+            <div className="div-dailist">
+              <ItemDetails data={test} />
+            </div>
+          </ul>
         </div>
       </div>
     </div>
@@ -113,7 +93,7 @@ const Week = () => {
 function getTime(time) {
   var date = new Date(time * 1000);
   var dayy = date.getDay();
-  const options = { weekday: "long" };
+  const options = { weekday: "short" };
   var dayy = new Intl.DateTimeFormat("en-US", options).format(date);
 
   return (
@@ -122,11 +102,10 @@ function getTime(time) {
     date.toLocaleDateString("en-US", {
       //hour: "numeric",
       //minute: "numeric",
-      
+
       dayy: "numeric",
       month: "numeric",
       // year:"2-digit"
-    
     })
   );
 }
