@@ -3,13 +3,9 @@ import { Link } from "react-router-dom";
 import "./css/TodayPage.css";
 import { useDispatch, useSelector } from "react-redux";
 import { FiSun, FiWind, FiPercent, FiClock } from "react-icons/fi";
-import axios from "axios";
 import { FaTemperatureLow } from "react-icons/fa";
 import { WiSunrise, WiSunset, WiHumidity } from "react-icons/wi";
-import {
-  fetchWeather7Action,
-  fetchWeatherAction,
-} from "../redux/slices/weatherslices";
+
 
 const Today = () => {
   const [dataWeather, setDataWeather] = useState([]);

@@ -8,11 +8,12 @@ import {
 } from "../redux/slices/weatherslices";
 import axios from "axios";
 import { URL_Location } from "../redux/slices/Api";
-import LocationBox from "../DailyItemDetails/LocationBox";
+
+//import { Autocomplete } from "@mui/material";
 
 
-//display icon https://openweathermap.org/img/wn/${icon}.png
-const PageLeft = () => {
+
+const PageLeft = ({dataSearch, placeholder}) => {
   const state = useSelector((state) => state);
   const { weather, loading, error } = state;
   const [lat, setLat] = useState("21.0294498");
@@ -22,8 +23,28 @@ const PageLeft = () => {
   const [city, setCity] = useState("");
   const dispatch = useDispatch();
   const  weatherIcon  = weather?.current;
-  //const image = useState(weather?.Prototype?.__proto__);
-  //console.log("image", image);
+  const [isLoading, setIsLoading] = useState(false);
+  const [filteredData, setFilteredData] = useState([]);
+  const [wordEntered ,setWordEntered] =useState("");
+  const [textSearch, setText] = useState([]);
+  console.log("search",textSearch);
+  const hanldFilter = (event) =>{
+    const searchWord = event.target.value;
+    const newFilter = dataSearch.filter((value) => {
+      return value.name.toLowerCase().includes(searchWord.toLowerCase());
+    });
+  
+    if(searchWord === ""){
+      setFilteredData([]);
+    }else{
+      setFilteredData(newFilter);
+    }
+  };
+  const clearInput =()=>{
+    setFilteredData([]);
+    setWordEntered("");
+  }
+  
   useEffect(
     (data) => {
       axios
@@ -44,27 +65,56 @@ const PageLeft = () => {
     },
     [location]
   );
-  const sideBar=({})=>{
-    
-  }
   return (
     <div className="Container">
       <section className="Page-left">
-        <div className="input-buttom">
-          {/* Input */}
-          <input
+        <div className="search-input">
+          <input className="search-Left" type="text" 
+          placeholder={placeholder} 
+          onChange={hanldFilter}
+          value={textSearch}
+            onKeyPress={(event) =>{
+              if (event.key === "Enter") {
+                setLocation(event.target.value);
+                dispatch(fetchWeather7Action());
+              }
+            }}
+          />
+         
+          {/* <input
             className="search-left"
             type="text"
-            placeholder="Search City"
+            //{...params.InputProps}
+            
+            placeholder={placeholder}
+            onChange={hanldFilter}
+            value={}
+            //options={dataSearch}
+            //autoFocus="true"
             onKeyPress={(event) => {
               if (event.key === "Enter") {
                 setLocation(event.target.value);
                 dispatch(fetchWeather7Action());
-                //dispatch(fetchWeatherAction(location));
               }
             }}
-          ></input>
-        </div>
+          > 
+          </input>  */}
+
+      </div>
+      <div >
+      { filteredData.length != 0 && (
+          <div className="dataSearch">
+              {filteredData.slice(0,15).map((value, index)=>{     
+                return  <p onClick={()=>{
+                  setText(value);
+                }} key={index}>{value.name}</p>
+                
+              })}
+          </div>
+          )}
+      </div>
+       
+       
         <div className="flex-list">
           <div className="forecast-icon">
             {Array.isArray(weatherIcon?.weather) ? (
@@ -88,22 +138,10 @@ const PageLeft = () => {
                   ): null}
                 <p className="p-left"> Clouds: {weather?.current.clouds} %</p>
           </div>
-          
 
-            
         </div>
         <div className="image">
-                <img
-                    className="img-fix-city"
-                    src="https://nemtv.vn/wp-content/uploads/2019/01/ha-noi-ve-dem-8.jpg"
-                    alt=""
-                  />
-                  {/* <LocationBox
-                    image={image}
-                   >
-
-                   </LocationBox> */}
-                   <p>{}</p>
+               
             </div>
           
       </section>

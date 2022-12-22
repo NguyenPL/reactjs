@@ -5,7 +5,6 @@ import "../DailyItemDetails/ItemDetails";
 import { useDispatch, useSelector } from "react-redux";
 import "moment-timezone";
 import ItemDetails from "../DailyItemDetails/ItemDetails";
-import { current } from "@reduxjs/toolkit";
 
 const Week = () => {
   const state = useSelector((state) => state);

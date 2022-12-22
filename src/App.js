@@ -7,7 +7,8 @@ import store from "./WeatherPages/redux/store/store";
 // import HourPage from "./WeatherPages/page/HourPage";
 // import TodayPage from "./WeatherPages/page/TodayPage";
 // import WeekPage from "./WeatherPages/page/WeekPage";
-const Search = lazy(() => import("./WeatherPages/page/PageLeft"));
+import searchData from "./Data.json";
+const PageLeft = lazy(() => import("./WeatherPages/page/PageLeft"));
 const TodayPage = lazy(() => import("./WeatherPages/page/TodayPage"));
 const HourPage = lazy(() => import("./WeatherPages/page/HourPage"));
 const WeekPage = lazy(() => import("./WeatherPages/page/WeekPage"));
@@ -18,7 +19,7 @@ function App() {
       <div className="App">
         <Provider store={store}>
           <Suspense fallback={<div>Loading...</div>}>
-            <Search />
+            <PageLeft dataSearch={searchData} placeholder="Search City..." />
             <Routes>
               <Route path="/" element={<TodayPage />} />
               <Route path="/Today" element={<TodayPage />} />s

@@ -3,6 +3,7 @@
    width: 40%;
    height: 900px;
    margin: auto;
+   
 }
 .Page-left{
    width: 100%;
@@ -10,15 +11,18 @@
    background-color: rgb(255, 255, 255);
    border-radius: 0px 0px 0px 0px;
 }
-.search-left{
+.search-input{
+   padding-top: 35px;
+}
+.search-Left{
    padding-left: 10px;
    margin: auto;
-   width: 93%;
+   width: 95%;
    height: 40px;
-   margin-top: 27px;
+  
    border-radius: 5px;
    border-color: rgb(233, 229, 223);
-   
+   display: flex;  
 }
 
 .name-city{
@@ -50,7 +54,9 @@ p{
    padding-bottom: 40px;
    padding-top: 27px;
    padding: 10px;
-   display: flex;
+   width: 100%;
+   position: relative;
+   
 }
 .flex-list{
    padding: 10px;
@@ -71,3 +77,28 @@ p{
    width: 150px;
    height: 150px;
 }
+.dropdown {
+   background-color: white;
+   display: flex;
+   flex-direction: column;
+   border: 1px solid gray;
+ }
+ .dataSearch{
+   margin-top: 5px;
+   margin-left: 10px;
+   height: 200px;
+   width: 21%;
+   background-color: white;
+   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+   overflow: hidden;
+   overflow-y: auto;
+   border-radius: 10px;
+   position: absolute; 
+   /* position: initial; */
+}
+ .dataSearch::-webkit-scrollbar {
+   display: none;
+ }
+ input:focus {
+   outline: none;
+ }

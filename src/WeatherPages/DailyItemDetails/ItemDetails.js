@@ -6,7 +6,7 @@ import { DailyWeatherDetailsModel } from "./ItemDetails";
 const ItemDetails = ({ data }) => {
   const state = useSelector((state) => state);
   const { weather, loading, error, direct } = state;
-  console.log(data);
+  //console.log(data);
   return (
     <div className="dataDailist">
       {data.clouds != null ? (

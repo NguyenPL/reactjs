@@ -1,0 +1,125 @@
+[
+   
+  {
+   "country": "AD",
+   "name": "Thai Nguyen",
+   "lat": "42.54277",
+   "lng": "1.73361"
+ },
+ {
+    "country": "VN",
+    "name": "Ha Noi"
+  },
+  {
+    "country": "VN",
+    "name": "Ho Chi Minh City"
+  },
+  {
+    "country": "VN",
+    "name": "Bac Ninh"
+  },
+  {
+    "country": "VN",
+    "name": "Bac Giang"
+  },
+  {
+    "country": "VN",
+    "name": "Đà  Nẵng"
+  },
+  {
+    "country": "VN",
+    "name": "Tuyên Quang"
+  },
+  {
+    "country": "VN",
+    "name": "Hạ Long"
+  },
+  {
+    "country": "VN",
+    "name": "Vinh"
+  },
+  {
+    "country": "VN",
+    "name": "Lào Cai"
+  },
+  {
+    "country": "VN",
+    "name": "Lạng Sơn"
+  },
+  {
+    "country": "VN",
+    "name": "Thanh Hóa"
+  },
+  {
+    "country": "AR",
+    "name": "San Clemente del Tuyú",
+    "lat": "-36.35694",
+    "lng": "-56.72351"
+  },
+  {
+    "country": "AR",
+    "name": "San Cayetano",
+    "lat": "-38.34653",
+    "lng": "-59.60954"
+  },
+  {
+    "country": "AR",
+    "name": "San Carlos",
+    "lat": "-27.74586",
+    "lng": "-55.89731"
+  },
+  {
+    "country": "AR",
+    "name": "San Antonio de Areco",
+    "lat": "-34.2503",
+    "lng": "-59.47163"
+  },
+  {
+    "country": "AR",
+    "name": "San Andrés de Giles",
+    "lat": "-34.44721",
+    "lng": "-59.44451"
+  },
+  {
+    "country": "AR",
+    "name": "Saladillo",
+    "lat": "-35.63708",
+    "lng": "-59.77788"
+  },
+  {
+    "country": "AR",
+    "name": "Saladas",
+    "lat": "-28.25384",
+    "lng": "-58.62591"
+  },
+  {
+    "country": "AR",
+    "name": "Ruiz de Montoya",
+    "lat": "-26.98333",
+    "lng": "-55.05"
+  },
+  {
+    "country": "AR",
+    "name": "Rosario del Tala",
+    "lat": "-32.30286",
+    "lng": "-59.14545"
+  },
+  {
+    "country": "AR",
+    "name": "Roque Pérez",
+    "lat": "-35.39794",
+    "lng": "-59.33271"
+  },
+  {
+    "country": "AR",
+    "name": "Riachuelo",
+    "lat": "-27.58191",
+    "lng": "-58.74497"
+  },
+  {
+    "country": "AR",
+    "name": "Riacho Eh-Eh",
+    "lat": "-25.36209",
+    "lng": "-58.2775"
+  }
+]
