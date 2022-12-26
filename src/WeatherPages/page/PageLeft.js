@@ -1,5 +1,5 @@
 import "./css/pageleft.css";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import weatherSVG from "../img/weather.svg";
 import {
@@ -8,7 +8,8 @@ import {
 } from "../redux/slices/weatherslices";
 import axios from "axios";
 import { URL_Location } from "../redux/slices/Api";
-
+import { text } from "@fortawesome/fontawesome-svg-core";
+import { type } from "@testing-library/user-event/dist/type";
 //import { Autocomplete } from "@mui/material";
 
 
@@ -16,35 +17,71 @@ import { URL_Location } from "../redux/slices/Api";
 const PageLeft = ({dataSearch, placeholder}) => {
   const state = useSelector((state) => state);
   const { weather, loading, error } = state;
-  const [lat, setLat] = useState("21.0294498");
-  const [lon, setLon] = useState("105.8544441");
-  
   const [location, setLocation] = useState("Ho Chi Minh");
-  const [city, setCity] = useState("");
+  const [city, setCity] = useState([]);
+  //console.log(city);
   const dispatch = useDispatch();
   const  weatherIcon  = weather?.current;
   const [isLoading, setIsLoading] = useState(false);
   const [filteredData, setFilteredData] = useState([]);
   const [wordEntered ,setWordEntered] =useState("");
   const [textSearch, setText] = useState([]);
-  console.log("search",textSearch);
-  const hanldFilter = (event) =>{
-    const searchWord = event.target.value;
-    const newFilter = dataSearch.filter((value) => {
-      return value.name.toLowerCase().includes(searchWord.toLowerCase());
-    });
+  const [showSearch, setshowSearch] = useState("");
+  const [test,setTest] =useState('');
+  const [open, setOpen] = useState(false);
+  let menuRef = useRef();
+  // console.log(showSearch);
+  // console.log(test);
+  // console.log("search",textSearch);
+  // const hanldFilter = (event) =>{
+  //   const searchWord = event.target.value;
+  //   const newFilter = dataSearch.filter((value) => {
+  //     return value.name.toLowerCase().includes(searchWord.toLowerCase());
+  //   });
   
-    if(searchWord === ""){
-      setFilteredData([]);
-    }else{
-      setFilteredData(newFilter);
+  //   if(searchWord === ""){
+  //     setFilteredData([]);
+  //   }else{
+  //     setFilteredData(newFilter);
+  //   }
+  // };
+  
+
+  useEffect(() => {
+    let handler = (e)=>{
+      if(!menuRef.current.contains(e.target)){
+        setOpen(false);
+        console.log(menuRef.current);
+      }      
+    };
+    document.addEventListener("mousedown", handler);
+    return() =>{
+      document.removeEventListener("mousedown", handler);
     }
-  };
-  const clearInput =()=>{
-    setFilteredData([]);
-    setWordEntered("");
+  });
+  const onSearch=(searchValue)=>{
+    setTest(searchValue)
   }
-  
+
+  const handlSearchHeader = (event) =>{
+    const showSearch = [];
+    
+   
+    if(event.target.value.length != 0){
+      dataSearch.filter((value) =>{
+        const searchValue = event.target.value.toLowerCase();
+        //  console.log("sadasd",searchValue); 
+        const searchDataHeader = value.name.toLowerCase();
+        return(searchValue && searchDataHeader.startsWith(searchValue) && searchDataHeader!== searchValue); 
+      }).map((value, index)=>{
+        showSearch[index] = value;
+      });
+      setshowSearch(showSearch);
+    }else{
+      setshowSearch([])
+    }
+  }
+
   useEffect(
     (data) => {
       axios
@@ -60,61 +97,42 @@ const PageLeft = ({dataSearch, placeholder}) => {
             dispatch(fetchWeather7Action(response.data.coord));
           }
           setCity(response.data.name);
-          console.log(response.data); 
+          //console.log(response.data);
         });
     },
     [location]
   );
   return (
-    <div className="Container">
+    <div className="Container" ref={menuRef}>
       <section className="Page-left">
-        <div className="search-input">
-          <input className="search-Left" type="text" 
-          placeholder={placeholder} 
-          onChange={hanldFilter}
-          value={textSearch}
+        <div className="search-input" onClick={()=>{setOpen(!open)}}>
+          <input className="search-Left"
+            type="text"
+            placeholder={placeholder}
+            onChange={handlSearchHeader}
+            value={textSearch}
+            
             onKeyPress={(event) =>{
               if (event.key === "Enter") {
                 setLocation(event.target.value);
                 dispatch(fetchWeather7Action());
               }
             }}
-          />
+          />  
          
-          {/* <input
-            className="search-left"
-            type="text"
-            //{...params.InputProps}
-            
-            placeholder={placeholder}
-            onChange={hanldFilter}
-            value={}
-            //options={dataSearch}
-            //autoFocus="true"
-            onKeyPress={(event) => {
-              if (event.key === "Enter") {
-                setLocation(event.target.value);
-                dispatch(fetchWeather7Action());
-              }
-            }}
-          > 
-          </input>  */}
-
       </div>
-      <div >
-      { filteredData.length != 0 && (
-          <div className="dataSearch">
-              {filteredData.slice(0,15).map((value, index)=>{     
+      <div className={`dropdown-menu ${open? 'active' : 'inactive'}`}>
+      { showSearch.length != 0 && (
+          <div className="dataSearch"> 
+              {showSearch.slice(0,15).map((item, index)=>{
                 return  <p onClick={()=>{
-                  setText(value);
-                }} key={index}>{value.name}</p>
-                
+                  setText(item.name);
+                }} key={index}>{item.name}</p>
               })}
           </div>
           )}
       </div>
-       
-       
+
         <div className="flex-list">
           <div className="forecast-icon">
             {Array.isArray(weatherIcon?.weather) ? (
