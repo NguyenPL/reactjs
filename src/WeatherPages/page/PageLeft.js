@@ -17,7 +17,7 @@ import { type } from "@testing-library/user-event/dist/type";
 const PageLeft = ({dataSearch, placeholder}) => {
   const state = useSelector((state) => state);
   const { weather, loading, error } = state;
-  const [location, setLocation] = useState("Ho Chi Minh");
+  const [location, setLocation] = useState("Thai Nguyen");
   const [city, setCity] = useState([]);
   //console.log(city);
   const dispatch = useDispatch();
@@ -25,7 +25,7 @@ const PageLeft = ({dataSearch, placeholder}) => {
   const [isLoading, setIsLoading] = useState(false);
   const [filteredData, setFilteredData] = useState([]);
   const [wordEntered ,setWordEntered] =useState("");
-  const [textSearch, setText] = useState([]);
+  const [textSearch, setText] = useState('');
   const [showSearch, setshowSearch] = useState("");
   const [test,setTest] =useState('');
   const [open, setOpen] = useState(false);
@@ -65,7 +65,8 @@ const PageLeft = ({dataSearch, placeholder}) => {
 
   const handlSearchHeader = (event) =>{
     const showSearch = [];
-    
+    setText(event.target.value);
+    //console.log("dâta", setText);
    
     if(event.target.value.length != 0){
       dataSearch.filter((value) =>{
@@ -97,7 +98,7 @@ const PageLeft = ({dataSearch, placeholder}) => {
             dispatch(fetchWeather7Action(response.data.coord));
           }
           setCity(response.data.name);
-          //console.log(response.data);
+          console.log(response.data);
         });
     },
     [location]
@@ -111,22 +112,22 @@ const PageLeft = ({dataSearch, placeholder}) => {
             placeholder={placeholder}
             onChange={handlSearchHeader}
             value={textSearch}
-            
+              
             onKeyPress={(event) =>{
               if (event.key === "Enter") {
                 setLocation(event.target.value);
                 dispatch(fetchWeather7Action());
               }
             }}
-          />  
-         
-      </div>
+          />          
+    </div>
       <div className={`dropdown-menu ${open? 'active' : 'inactive'}`}>
       { showSearch.length != 0 && (
           <div className="dataSearch"> 
               {showSearch.slice(0,15).map((item, index)=>{
                 return  <p onClick={()=>{
-                  setText(item.name);
+                   setText(item.name);
+                   
                 }} key={index}>{item.name}</p>
               })}
           </div>

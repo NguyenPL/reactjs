@@ -5,6 +5,7 @@ import "../DailyItemDetails/ItemDetails";
 import { useDispatch, useSelector } from "react-redux";
 import "moment-timezone";
 import ItemDetails from "../DailyItemDetails/ItemDetails";
+import { click } from "@testing-library/user-event/dist/click";
 
 const Week = () => {
   const state = useSelector((state) => state);
@@ -14,11 +15,15 @@ const Week = () => {
   const [test, setTest] = useState([]);
   const [image, setImage] = useState("");
   const [isActive, setIsActive] = useState(false);
-  //const [backgroundColor, setBackGroudColor] = useState(false);
 
-  // const hanldClick = () => {
-  //   setIsActive((current) => !current);
-  // };
+  var panels = document.querySelectorAll(".uv-index-week");
+  panels.forEach((each) => {
+    each.onclick = function () {
+      panels.forEach((ss) => ss.classList.remove("active")); // removing active from all
+      each.classList.add("active"); // assigning active to selected
+    };
+  });
+
   return (
     <div className="component-week">
       <div className="right-week">
@@ -43,14 +48,9 @@ const Week = () => {
             {weather
               ? weather.daily.map((item, index) => (
                   <div
-                    // style={{
-                    //   backgroundColor: isActive ? "#0fb6e0" : "",
-                    //   //color: isActive ? "white" : "",
-                    // }}
                     className="uv-index-week"
                     onClick={() => {
                       setTest(item);
-                      //hanldClick();
                     }}
                     key={index}
                   >

@@ -145,15 +145,18 @@
    background-color: white;
    margin-bottom: 20px;
    color: #68645f;
+   cursor: pointer;
  }
- .uv-index-week:active{
-  background-color: #73d0e8;
-  color: white;
+ .active{
+  
+  background-color: #0fb6e0;
+  color: rgb(246, 242, 242);
  }
+
  .space{
   margin-left: 8px;
   margin-right: 8px;
- }
+ }  
  
  .icon-W{
    width: 100%;

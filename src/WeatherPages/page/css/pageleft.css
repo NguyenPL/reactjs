@@ -19,7 +19,7 @@
    margin: auto;
    width: 95%;
    height: 40px;
-  
+   cursor: pointer;
    border-radius: 5px;
    border-color: rgb(233, 229, 223);
    display: flex;  
@@ -94,6 +94,7 @@ p{
    overflow-y: auto;
    border-radius: 10px;
    position: absolute; 
+   color: rgb(33, 32, 32);
    /* position: initial; */
 }
  .dataSearch::-webkit-scrollbar {
