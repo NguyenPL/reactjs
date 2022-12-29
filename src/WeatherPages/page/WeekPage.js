@@ -62,7 +62,7 @@ const Week = () => {
                         alt="/"
                       />
                     </p>
-                    <div className="temp-fells">
+                    <div className="temp-fells ">
                       <p className="l">
                         <a className="l">
                           {Math.ceil(Number(item.temp.min - 275.15))}

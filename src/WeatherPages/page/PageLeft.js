@@ -7,7 +7,7 @@ import {
   fetchWeatherAction,
 } from "../redux/slices/weatherslices";
 import axios from "axios";
-import { URL_Location } from "../redux/slices/Api";
+import { URL_Location, apiURL, apiKey, API_KEY } from "../redux/slices/Api";
 import { text } from "@fortawesome/fontawesome-svg-core";
 import { type } from "@testing-library/user-event/dist/type";
 //import { Autocomplete } from "@mui/material";
@@ -22,13 +22,14 @@ const PageLeft = ({dataSearch, placeholder}) => {
   //console.log(city);
   const dispatch = useDispatch();
   const  weatherIcon  = weather?.current;
-  const [isLoading, setIsLoading] = useState(false);
-  const [filteredData, setFilteredData] = useState([]);
-  const [wordEntered ,setWordEntered] =useState("");
   const [textSearch, setText] = useState('');
   const [showSearch, setshowSearch] = useState("");
   const [test,setTest] =useState('');
   const [open, setOpen] = useState(false);
+  const [iplocation, setIpLocation] = useState('');
+  const [country, setCountry] = useState('');
+  const [Error,setError] = useState('');
+  const [responseCity, setResponseCity] = useState('');
   let menuRef = useRef();
   // console.log(showSearch);
   // console.log(test);
@@ -46,13 +47,52 @@ const PageLeft = ({dataSearch, placeholder}) => {
   //   }
   // };
   
+  const apiURL = 'https://ipgeolocation.abstractapi.com/v1/?api_key=38f51875d91d4feba0321adf68205f44';
+ useEffect(
+  (data)=> {
+     axios.get(apiURL,{
+      params: {
+        q: location,
+        units: "Metric",
+        lang: "en",
+      },
+     }).then(function(response){   
+      if(response.data) 
+            console.log("data",response.data);
+            setResponseCity(response.data.city);
+            setCountry(response.data.country_code)
+          });
+     
+ },[]);
+    
+  
+
+
+// const locate =() => {
+//   const posStatus = document.querySelector('#posStatus');
+//   const locInfo = document.querySelector('#locInfo'); 
+//   posStatus.innerHTML = 'Đang lấy vị trí...'
+//   if (navigator.geolocation) {
+//       navigator.geolocation.getCurrentPosition((position) => {
+//           const lat = position.coords.latitude;
+//           const long = position.coords.longitude; posStatus.innerHTML = 'Vị Trí Của Bạn:';// Display Latitude and Logitude
+//           locInfo.innerHTML = `Lat: ${lat}, Lon: ${long}`;      // Create the link. Use map=15-19 for zooming out and in
+//           // Pass lat and long to openstreetmap 
+//           locInfo.href = `https://www.openstreetmap.org/#map=19/${lat}/${long}`;
+//           //locInfo.href = `http://api.openweathermap.org/data/2.5/weather?&appid=${lat}/${long}`;
+
+//           console.log(locInfo);
+//       });
+//   }
+// }
+
 
   useEffect(() => {
     let handler = (e)=>{
       if(!menuRef.current.contains(e.target)){
         setOpen(false);
         console.log(menuRef.current);
-      }      
+      }
     };
     document.addEventListener("mousedown", handler);
     return() =>{
@@ -62,6 +102,8 @@ const PageLeft = ({dataSearch, placeholder}) => {
   const onSearch=(searchValue)=>{
     setTest(searchValue)
   }
+ 
+ 
 
   const handlSearchHeader = (event) =>{
     const showSearch = [];
@@ -78,6 +120,7 @@ const PageLeft = ({dataSearch, placeholder}) => {
         showSearch[index] = value;
       });
       setshowSearch(showSearch);
+
     }else{
       setshowSearch([])
     }
@@ -98,8 +141,11 @@ const PageLeft = ({dataSearch, placeholder}) => {
             dispatch(fetchWeather7Action(response.data.coord));
           }
           setCity(response.data.name);
+          //setCountry(response.data.sys.country)
           console.log(response.data);
         });
+       
+        
     },
     [location]
   );
@@ -111,6 +157,7 @@ const PageLeft = ({dataSearch, placeholder}) => {
             type="text"
             placeholder={placeholder}
             onChange={handlSearchHeader}
+            
             value={textSearch}
               
             onKeyPress={(event) =>{
@@ -121,17 +168,17 @@ const PageLeft = ({dataSearch, placeholder}) => {
             }}
           />          
     </div>
-      <div className={`dropdown-menu ${open? 'active' : 'inactive'}`}>
+      <div className={`dropdown-menu ${open?'active' : 'inactive'}`}>
       { showSearch.length != 0 && (
           <div className="dataSearch"> 
-              {showSearch.slice(0,15).map((item, index)=>{
-                return  <p onClick={()=>{
-                   setText(item.name);
-                   
-                }} key={index}>{item.name}</p>
-              })}
+              {showSearch.slice(0,10).map((item, index)=>{
+                return  <p className="boder-buttom" 
+                onClick={()=>{
+                    setText(item.name); 
+                  }} key={index}>{item.name}</p>
+                })}
           </div>
-          )}
+        )}
       </div>
 
         <div className="flex-list">
@@ -141,7 +188,7 @@ const PageLeft = ({dataSearch, placeholder}) => {
                 src={
                     "http://openweathermap.org/img/wn/" +
                     weatherIcon.weather[0].icon + 
-                    "@2x.png"} 
+                    "@4x.png"} 
               />
             ): null}    
  
@@ -151,19 +198,19 @@ const PageLeft = ({dataSearch, placeholder}) => {
                 <h3 className="name-city">
                   {Math.ceil(Number(weather?.current.temp - 275.15))} <span>°C</span>
                 </h3>
-                <p className="p-left">{getTime(weather?.current.dt)}</p>
+                <p className="p-left-1">{getTime(weather?.current.dt)}</p>
                 {Array.isArray(weatherIcon?.weather) ? (
-                  <p className="p-left">{weatherIcon.weather[0].description}</p>
+                  <p className="p-left-2">{weatherIcon.weather[0].description}</p>
                   ): null}
-                <p className="p-left"> Clouds: {weather?.current.clouds} %</p>
+                <p className="p-left-3"> clouds: {weather?.current.clouds} %</p>
           </div>
 
         </div>
-        <div className="image">
-               
-            </div>
-          
+        <div className="address">
+            <span>Vị Trí Của Bạn:  <span className="name-text" >{responseCity}</span>,<span className="name-text" >{country}</span> </span>
+      </div>
       </section>
+      
     </div>
   );
 };
@@ -177,7 +224,7 @@ function getTime(time) {
   return (
     day +
     ",  " +
-    date.toLocaleTimeString("en-US", {
+    date.toLocaleTimeString("en-US",{
       hour: "numeric",
       minute: "numeric",
       //day: "numeric",

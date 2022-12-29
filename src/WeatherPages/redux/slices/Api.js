@@ -8,3 +8,5 @@ export const URL_Data = `https://api.openweathermap.org/data/2.5/onecall?&appid=
 // export const URL_UNSPLASH = "https://api.unsplash.com/search/photos";
 // export const SEARCH_BY_WORD = `${URL_UNSPLASH}?client_id=${API_UNPSLASH}&page=1&query=`;
 // export const SEARCH_DEFAULT = `${URL_UNSPLASH}?client_id=${API_UNPSLASH}&page=1&query=Spain`;
+// export const apiURL = "https://ipgeolocation.abstractapi.com/v1/";
+// export const apiKey = "38f51875d91d4feba0321adf68205f44";
